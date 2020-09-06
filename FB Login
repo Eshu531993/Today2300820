@@ -1,0 +1,55 @@
+package TestFB;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class FBLogin {
+	
+	public ChromeDriver Driver;
+	
+	@Before
+	public void open()
+	{
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\sapple\\Downloads\\chromedriver.exe");
+		Driver=new ChromeDriver();
+		Driver.get("https://www.facebook.com/");
+		Driver.manage().window().maximize();
+	}
+	@Test
+	public void Func1()
+	{
+		WebElement FirstName=Driver.findElement(By.id("u_0_m"));
+		FirstName.sendKeys("Shaksham");
+		WebElement SurName=Driver.findElement(By.name("lastname"));
+		SurName.sendKeys("Garg");
+		WebElement EmailAdd=Driver.findElement(By.cssSelector("input#u_0_r"));
+		EmailAdd.sendKeys("hulludaddy@gmail.com");
+		WebElement Verify=Driver.findElement(By.name("reg_email_confirmation__"));
+		Verify.sendKeys("hulludaddy@gmail.com");
+		WebElement Password=Driver.findElement(By.cssSelector("input[name='reg_passwd__']"));
+		Password.sendKeys("Expandables");
+		WebElement Birthday=Driver.findElement(By.name("birthday_day"));
+		Select Auto=new Select(Birthday);
+		Auto.selectByIndex(10);
+		WebElement BirthdayMonth=Driver.findElement(By.id("month"));
+		Select Month=new Select(BirthdayMonth);
+		Month.selectByValue("4");
+		WebElement BirthdayYear=Driver.findElement(By.name("birthday_year"));
+		Select Year=new Select(BirthdayYear);
+		Year.selectByVisibleText("1993");
+		WebElement Radio1=Driver.findElement(By.cssSelector("input[value='2']"));
+		Radio1.click();
+		WebElement Submit=Driver.findElement(By.cssSelector("button[type='submit']"));
+		Submit.click();
+	}
+	@After
+	public void BClose()
+	{
+		Driver.close();
+	}
+}
